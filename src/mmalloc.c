@@ -15,7 +15,25 @@
 #include <mmalloc.h>
 
 __attribute__ ((leaf, nonnull (1, 2), nothrow, warn_unused_result))
-int mmalloc (void const *restrict dests[],
+int mmalloc_naive (void /*const*/ *restrict dests[],
+	size_t const eszs[], size_t n) {
+	size_t i;
+	#pragma GCC ivdep
+	for (i = 0; i != n; i++)
+		dests[i] = (void const *restrict) malloc (eszs[i]);
+	return 0;
+}
+
+__attribute__ ((leaf, nonnull (1), nothrow))
+void mfree_naive (void /*const*/ *restrict dests[], size_t n) {
+	size_t i;
+	#pragma GCC ivdep
+	for (i = 0; i != n; i++)
+		free (dests[i]);
+}
+
+__attribute__ ((leaf, nonnull (1, 2), nothrow, warn_unused_result))
+int mmalloc (void /*const*/ *restrict dests[],
 	size_t const eszs[], size_t sumsz, size_t n) {
 	size_t i, cumsum;
 	char const *restrict tmp;
@@ -30,6 +48,11 @@ int mmalloc (void const *restrict dests[],
 	return 0;
 }
 
+__attribute__ ((leaf, nonnull (1), nothrow))
+void mfree (void /*const*/ *restrict dests0[]) {
+	free (*dests0);
+}
+
 __attribute__ ((leaf, nonnull (1), nothrow, pure, warn_unused_result))
 size_t sum_size_t (size_t const x[], size_t n) {
 	size_t i, sum;
@@ -39,7 +62,7 @@ size_t sum_size_t (size_t const x[], size_t n) {
 }
 
 __attribute__ ((nonnull (1, 2), nothrow, warn_unused_result))
-int ez_mmalloc (void const *restrict dests[],
+int ez_mmalloc (void /*const*/ *restrict dests[],
 	size_t const eszs[], size_t n) {
 	size_t sumsz = sum_size_t (eszs, n);
 	return mmalloc (dests, eszs, sumsz, n);
