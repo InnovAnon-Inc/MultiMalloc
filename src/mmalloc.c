@@ -42,5 +42,5 @@ __attribute__ ((nonnull (1, 2), nothrow, warn_unused_result))
 int ez_mmalloc (void const *restrict dests[],
 	size_t const eszs[], size_t n) {
 	size_t sumsz = sum_size_t (eszs, n);
-	return mmalloc (dests, esz, sumsz, n);
+	return mmalloc (dests, eszs, sumsz, n);
 }
