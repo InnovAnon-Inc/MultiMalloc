@@ -1,8 +1,8 @@
 AM_CPPFLAGS = -D__STDC_INT64__
 
 SUBDIRS = ../glitter
-AM_CPPFLAGS += -I ../glitter/src
-#AM_CPPFLAGS += -I ../ZePaSt/src
+AM_CPPFLAGS += -I $(top_srcdir)/glitter/src
+#AM_CPPFLAGS += -I $(top_srcdir)/ZePaSt/src
 
 lib_LTLIBRARIES =
 include_HEADERS =
