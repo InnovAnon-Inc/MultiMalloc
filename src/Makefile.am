@@ -8,7 +8,7 @@ lib_LTLIBRARIES =
 include_HEADERS =
 bin_PROGRAMS    =
 
-LIBMMALLOC_LIBADD =
+include Makefile-LIBADD.inc
 
 lib_LTLIBRARIES += libmmalloc.la
 libmmalloc_la_LIBADD = $(LIBMMALLOC_LIBADD)
