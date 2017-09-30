@@ -12,28 +12,35 @@
 #endif
 #include <stdlib.h>
 
-#include <sum.h>
-
 #include <mmalloc.h>
 
-__attribute__ ((leaf, nonnull (1), nothrow, warn_unused_result))
+__attribute__ ((leaf, nonnull (1, 2), nothrow, warn_unused_result))
 int multi_malloc (void const *restrict dests[],
-	size_t sumsz, size_t n) {
-	size_t i, sumsz;
+	size_t const eszs[], size_t sumsz, size_t n) {
+	size_t i, cumsum;
 	char const *restrict tmp;
 
 	tmp = (char const *restrict) malloc (sumsz);
 	error_check (tmp == NULL) return -1;
 
-	for (i = sumsz = 0; i != n; sumsz += eszs[i], i++)
-		dest[i] = (void const *restrict) (tmp + sumsz);
+	for (i = cumsum = 0; i != n; cumsum += eszs[i], i++)
+		dest[i] = (void const *restrict) (tmp + cumsum);
 
+	/*assert (sumsz == cumsum)*/
 	return 0;
+}
+
+__attribute__ ((leaf, nonnull (1), nothrow, pure, warn_unused_result))
+size_t sum_size_t (size_t const x[], size_t n) {
+	size_t i, sum;
+	for (i = sum = 0; i != n; i++)
+		sum += x[i];
+	return sum;
 }
 
 __attribute__ ((nonnull (1, 2), nothrow, warn_unused_result))
 int ez_multi_malloc (void const *restrict dests[],
 	size_t const eszs[], size_t n) {
-	size_t sumsz = ezr_sum (eszs, n);
+	size_t sumsz = sum_size_t (eszs, n);
 	return multi_malloc (dests, sumsz, n);
 }

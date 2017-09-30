@@ -9,13 +9,15 @@ AC_CONFIG_FILES([
  src/Makefile
 ])
 AC_CONFIG_MACRO_DIR([m4])
-AC_CONFIG_SUBDIRS([glitter ZePaSt])
+#AC_CONFIG_SUBDIRS([glitter ZePaSt])
+AC_CONFIG_SUBDIRS([glitter])
 
 AC_CHECK_HEADERS([stdlib.h sys/types.h string.h])
-AC_CHECK_HEADERS([glitter.h mean.h])
+#AC_CHECK_HEADERS([glitter.h sum.h])
+AC_CHECK_HEADERS([glitter.h])
 
 AC_CHECK_LIB([stdlib],[malloc])
-AC_CHECK_LIB([sum],[ezr_sum])
+#AC_CHECK_LIB([sum],[ezr_sum])
 
 INNOVANON_WARNINGS([])
 
