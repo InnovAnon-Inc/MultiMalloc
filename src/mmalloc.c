@@ -20,7 +20,7 @@ int mmalloc_naive (void /*const*/ *restrict dests[],
 	size_t i;
 	#pragma GCC ivdep
 	for (i = 0; i != n; i++)
-		dests[i] = (void const *restrict) malloc (eszs[i]);
+		dests[i] = (void /*const*/ *restrict) malloc (eszs[i]);
 	return 0;
 }
 
@@ -36,13 +36,13 @@ __attribute__ ((leaf, nonnull (1, 2), nothrow, warn_unused_result))
 int mmalloc (void /*const*/ *restrict dests[],
 	size_t const eszs[], size_t sumsz, size_t n) {
 	size_t i, cumsum;
-	char const *restrict tmp;
+	char /*const*/ *restrict tmp;
 
-	tmp = (char const *restrict) malloc (sumsz);
+	tmp = (char /*const*/ *restrict) malloc (sumsz);
 	error_check (tmp == NULL) return -1;
 
 	for (i = cumsum = 0; i != n; cumsum += eszs[i], i++)
-		dests[i] = (void const *restrict) (tmp + cumsum);
+		dests[i] = (void /*const*/ *restrict) (tmp + cumsum);
 
 	/*assert (sumsz == cumsum)*/
 	return 0;
