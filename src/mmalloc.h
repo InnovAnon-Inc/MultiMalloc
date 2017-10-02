@@ -37,6 +37,16 @@ __attribute__ ((leaf, nonnull (1), nothrow, warn_unused_result)) ;
 void mfree2 (void /*const*/ *restrict dests0)
 __attribute__ ((leaf, nonnull (1), nothrow)) ;
 
+typedef __attribute__ ((warn_unused_result))
+void *(*do_alloc_t) (void const *restrict) ;
+
+typedef __attribute__ ((nonnull (1)))
+void (*do_free_t) (void *restrict) ;
+
+int ezmalloc (do_alloc_t do_alloc, void const *restrict alloc_args,
+   stdcb_t cb, do_free_t do_free)
+__attribute__ ((leaf, nonnull (1, 3, 4), nothrow, warn_unused_result)) ;
+
 #ifdef __cplusplus
 }
 #endif
