@@ -30,7 +30,7 @@ __attribute__ ((nonnull (1, 2), nothrow, warn_unused_result)) ;
 void mfree (void /*const*/ *restrict dests0[])
 __attribute__ ((leaf, nonnull (1), nothrow)) ;
 
-int mmalloc2 (void const *restrict *restrict dests[],
+int mmalloc2 (void *restrict *restrict dests[],
 	size_t const eszs[], size_t sumsz, size_t n)
 __attribute__ ((leaf, nonnull (1), nothrow, warn_unused_result)) ;
 
