@@ -34,7 +34,7 @@ int mmalloc2 (void /*const*/ *restrict dests[],
 	size_t const eszs[], size_t sumsz, size_t n)
 __attribute__ ((leaf, nonnull (1), nothrow, warn_unused_result)) ;
 
-void mfree2 (void /*const*/ *restrict dests0[])
+void mfree2 (void /*const*/ *restrict dests0)
 __attribute__ ((leaf, nonnull (1), nothrow)) ;
 
 #ifdef __cplusplus
