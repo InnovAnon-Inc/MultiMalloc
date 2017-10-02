@@ -5,11 +5,7 @@
 #define _POSIX_C_SOURCE 200112L
 #define __STDC_VERSION__ 200112L
 
-#define NDEBUG 1
-
-#ifndef NDEBUG
-#include <stdio.h>
-#endif
+#include <assert.h>
 #include <stdlib.h>
 
 #include <mmalloc.h>
@@ -17,10 +13,15 @@
 __attribute__ ((leaf, nonnull (1, 2), nothrow, warn_unused_result))
 int mmalloc_naive (void /*const*/ *restrict dests[],
 	size_t const eszs[], size_t n) {
-	size_t i;
+	size_t i, j;
 	#pragma GCC ivdep
-	for (i = 0; i != n; i++)
+	for (i = 0; i != n; i++) {
 		dests[i] = (void /*const*/ *restrict) malloc (eszs[i]);
+		error_check (dests[i] != NULL) {
+			for (j = 0; j != i; j++) free (dests[j]);
+			return -1;
+		}
+	}
 	return 0;
 }
 
@@ -44,13 +45,34 @@ int mmalloc (void /*const*/ *restrict dests[],
 	for (i = cumsum = 0; i != n; cumsum += eszs[i], i++)
 		dests[i] = (void /*const*/ *restrict) (tmp + cumsum);
 
-	/*assert (sumsz == cumsum)*/
+	assert (sumsz == cumsum);
+	return 0;
+}
+
+__attribute__ ((leaf, nonnull (1, 2), nothrow, warn_unused_result))
+int mmalloc2 (void /*const*/ *restrict *restrict dests[],
+	size_t const eszs[], size_t sumsz, size_t n) {
+	size_t i, cumsum;
+	char /*const*/ *restrict tmp;
+
+	tmp = (char /*const*/ *restrict) malloc (sumsz);
+	error_check (tmp == NULL) return -1;
+
+	for (i = cumsum = 0; i != n; cumsum += eszs[i], i++)
+		*(dests[i]) = (void /*const*/ *restrict) (tmp + cumsum);
+
+	assert (sumsz == cumsum);
 	return 0;
 }
 
 __attribute__ ((leaf, nonnull (1), nothrow))
 void mfree (void /*const*/ *restrict dests0[]) {
 	free (*dests0);
+}
+
+__attribute__ ((leaf, nonnull (1), nothrow))
+void mfree2 (void /*const*/ *restrict dests0) {
+	free (dests0);
 }
 
 __attribute__ ((leaf, nonnull (1), nothrow, pure, warn_unused_result))
