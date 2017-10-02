@@ -50,7 +50,7 @@ int mmalloc (void /*const*/ *restrict dests[],
 }
 
 __attribute__ ((leaf, nonnull (1, 2), nothrow, warn_unused_result))
-int mmalloc2 (void /*const*/ *restrict *restrict dests[],
+int mmalloc2 (void const *restrict *restrict dests[],
 	size_t const eszs[], size_t sumsz, size_t n) {
 	size_t i, cumsum;
 	char /*const*/ *restrict tmp;
