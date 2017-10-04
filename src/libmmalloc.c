@@ -92,8 +92,8 @@ int ez_mmalloc (void /*const*/ *restrict dests[],
 
 
 __attribute__ ((leaf, nonnull (1, 3, 4), nothrow, warn_unused_result))
-int ezmalloc (do_alloc_t do_alloc, void const *restrict alloc_args,
-   stdcb_t cb, do_free_t do_free) {
+int ezmalloc (alloc_t do_alloc, void const *restrict alloc_args,
+   stdcb_t cb, free_t do_free) {
    void *restrict ds = do_alloc (alloc_args);
    error_check (ds == NULL) return -1;
    error_check (cb (ds) != 0) return -2;
