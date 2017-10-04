@@ -7,6 +7,7 @@ extern "C" {
 
 #include <sys/types.h>
 
+#include <dsint.h>
 #include <glitter.h>
 
 int mmalloc_naive (void /*const*/ *restrict dests[],
