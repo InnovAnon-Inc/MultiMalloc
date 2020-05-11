@@ -10,10 +10,12 @@ lib_LTLIBRARIES =
 include_HEADERS =
 bin_PROGRAMS    =
 
-include Makefile-LIBADD.inc
+#include Makefile-LIBADD.inc
+dist_bin_SCRIPTS = libmmalloc_config
 
 lib_LTLIBRARIES += libmmalloc.la
 libmmalloc_la_LIBADD = $(LIBMMALLOC_LIBADD)
+#libmmalloc_la_LIBADD = `./libmmalloc_config --libs`
 include_HEADERS += mmalloc.h
 #bin_PROGRAMS += mmalloc-test
 #mmalloc_test_LDADD = libmmalloc.la -lsum
