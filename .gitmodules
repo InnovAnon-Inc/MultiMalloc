@@ -4,6 +4,3 @@
 [submodule "glitter"]
 	path = glitter
 	url = https://github.com/InnovAnon-Inc/glitter.git
-[submodule "ZePaSt"]
-	path = ZePaSt
-	url = https://github.com/InnovAnon-Inc/ZePaSt.git
