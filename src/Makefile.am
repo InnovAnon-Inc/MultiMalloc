@@ -14,7 +14,8 @@ bin_PROGRAMS    =
 dist_bin_SCRIPTS = libmmalloc_config
 
 lib_LTLIBRARIES += libmmalloc.la
-libmmalloc_la_LIBADD = $(LIBMMALLOC_LIBADD)
+#libmmalloc_la_LIBADD = $(LIBMMALLOC_LIBADD)
+libmmalloc_la_LIBADD = @LIBMMALLOC_LIBADD@
 #libmmalloc_la_LIBADD = `./libmmalloc_config --libs`
 include_HEADERS += mmalloc.h
 #bin_PROGRAMS += mmalloc-test
