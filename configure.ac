@@ -25,8 +25,9 @@ AC_CHECK_HEADERS([glitter.h])
 AC_CHECK_LIB([stdlib],[malloc])
 #AC_CHECK_LIB([sum],[ezr_sum])
 
-srcdir = @srcdir@
-LIBMMALLOC_LIBADD="`PATH=$(srcdir)src:$PATH libmmalloc_config --libs`"
+#srcdir = @srcdir@
+#LIBMMALLOC_LIBADD="`PATH=$(srcdir)src:$PATH libmmalloc_config --libs`"
+LIBMMALLOC_LIBADD="`PATH=src:$PATH libmmalloc_config --libs`"
 AC_SUBST(LIBMMALLOC_LIBADD)
 
 INNOVANON_WARNINGS([])
