@@ -9,6 +9,6 @@ libmmalloc_la_CPPFLAGS = $(GLITTER_CFLAGS)
 libmmalloc_la_LIBADD   = $(GLITTER_LIBS)
 include_HEADERS += mmalloc.h
 
-#bin_PROGRAMS += mmalloc-test
+#bin-PROGRAMS += mmalloc-test
 #mmalloc_test_LDADD = libmmalloc.la -lsum
 

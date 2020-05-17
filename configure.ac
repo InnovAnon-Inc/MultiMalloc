@@ -8,7 +8,7 @@ AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_FILES([
  Makefile
  src/Makefile
- src/mmalloc.pc
+ src/libmmalloc.pc
 ])
 
 PKG_PROG_PKG_CONFIG
