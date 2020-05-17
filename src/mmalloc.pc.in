@@ -1,0 +1,15 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+#mmalloc_utility=mmalloc-test
+
+Name: @PACKAGE_NAME@
+Description: mmalloc library
+Version: @PACKAGE_VERSION@
+Libs: -L${libdir} -lmmalloc
+Cflags: -I${includedir}
+Requires: glitter
+Requires.private:
+

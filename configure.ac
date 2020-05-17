@@ -8,15 +8,16 @@ AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_FILES([
  Makefile
  src/Makefile
+ src/mmalloc.in
 ])
+
+PKG_PROG_PKG_CONFIG
 
 AC_ARG_ENABLE([use-submodules],
     AS_HELP_STRING([--enable-use-submodules], [Enable use submodules]))
 AM_CONDITIONAL([USE_SUBMODULES], [test x"$enable_use_submodules" = "xyes"])
 
 AC_CONFIG_MACRO_DIR([m4])
-#AC_CONFIG_SUBDIRS([glitter ZePaSt])
-#AC_CONFIG_SUBDIRS([glitter])
 
 AC_CHECK_HEADERS([stdlib.h sys/types.h string.h])
 #AC_CHECK_HEADERS([glitter.h sum.h])
@@ -25,11 +26,9 @@ AC_CHECK_HEADERS([glitter.h])
 AC_CHECK_LIB([stdlib],[malloc])
 #AC_CHECK_LIB([sum],[ezr_sum])
 
-#srcdir = @srcdir@
-#LIBMMALLOC_LIBADD="`PATH=$(srcdir)src:$PATH libmmalloc_config --libs`"
-LIBMMALLOC_LIBADD="`PATH=src:$PATH libmmalloc_config --libs`"
-AC_SUBST(LIBMMALLOC_LIBADD)
+PKG_CHECK_MODULES([GLITTER],[glitter],,)
 
 INNOVANON_WARNINGS([])
 
 AC_OUTPUT
+
