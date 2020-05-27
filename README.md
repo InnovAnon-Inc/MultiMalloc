@@ -1,6 +1,7 @@
 # MultiMalloc
 aggregates Multi(ple) Malloc(s) into one invocation of malloc()
 ==========
+...because memory management just wasn't hard enough as it was.
 
 [![CircleCI](https://img.shields.io/circleci/build/github/InnovAnon-Inc/MultiMalloc?color=%23FF1100&logo=InnovAnon%2C%20Inc.&logoColor=%23FF1133&style=plastic)](https://circleci.com/gh/InnovAnon-Inc/MultiMalloc)
 [![Repo Size](https://img.shields.io/github/repo-size/InnovAnon-Inc/MultiMalloc?color=%23FF1100&logo=InnovAnon%2C%20Inc.&logoColor=%23FF1133&style=plastic)](https://github.com/InnovAnon-Inc/MultiMalloc)
